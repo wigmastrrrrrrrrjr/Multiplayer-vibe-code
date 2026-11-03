@@ -1,0 +1,24 @@
+{
+  "name": "multiplayer-vibe-code",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Lobby-owned project folder synced across devices, with AI models joining via MCP.",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "selfhost": "npm start --workspace @mvc/node-server",
+    "e2e": "npm run e2e --workspaces --if-present",
+    "deploy:staging": "node packages/server/scripts/deploy-worker.mjs staging",
+    "deploy:prod": "node packages/server/scripts/deploy-worker.mjs prod"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

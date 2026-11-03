@@ -1,0 +1,56 @@
+name = "mvc-server"
+main = "src/index.ts"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+# --- Durable Objects: one Lobby DO per lobby --------------------------------
+# new_sqlite_classes gives each Lobby a DO SQLite database (GA).
+[durable_objects]
+bindings = [{ name = "LOBBY_OBJECT", class_name = "Lobby" }]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Lobby"]
+
+# --- Environments -----------------------------------------------------------
+# dev  → wrangler dev (local + workers.dev playground)
+# staging → always-on online-E2E target (never released from here)
+# prod → release channel, gated by green staging E2E
+[env.staging]
+name = "mvc-server-staging"
+
+[env.staging.durable_objects]
+bindings = [{ name = "LOBBY_OBJECT", class_name = "Lobby" }]
+
+[[env.staging.migrations]]
+tag = "v1"
+new_sqlite_classes = ["Lobby"]
+
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "mvc-lobbies-staging"
+database_id = "6fc84178-ee37-4057-b93c-f226a9ba27ca"
+
+[env.staging.triggers]
+crons = ["*/1 * * * *"]
+
+[env.prod]
+name = "mvc-server"
+
+[env.prod.durable_objects]
+bindings = [{ name = "LOBBY_OBJECT", class_name = "Lobby" }]
+
+[[env.prod.migrations]]
+tag = "v1"
+new_sqlite_classes = ["Lobby"]
+
+[[env.prod.d1_databases]]
+binding = "DB"
+database_name = "mvc-lobbies"
+database_id = "16cf0688-5357-4761-a149-bea7ab7e6c24"
+
+[env.prod.triggers]
+crons = ["*/1 * * * *"]
+
+# Secrets (never in git): `wrangler secret put --env <env> MCP_SIGNING_SECRET`

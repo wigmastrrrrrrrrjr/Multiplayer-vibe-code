@@ -1,0 +1,23 @@
+{
+  "name": "@mvc/node-server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Self-hosted Node.js lobby server (no Cloudflare/workerd required).",
+  "main": "src/app.js",
+  "bin": {
+    "mvc-server": "src/server.js"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test src/*.test.js"
+  },
+  "dependencies": {
+    "@mvc/server-do": "*",
+    "@mvc/shared": "*",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}

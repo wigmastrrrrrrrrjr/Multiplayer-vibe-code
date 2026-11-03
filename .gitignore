@@ -1,0 +1,32 @@
+# Secrets — never commit (rotate + keep out of issue/PR comments too)
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+credentials.json
+service-account*.json
+
+# Node
+node_modules/
+dist/
+build/
+*.log
+
+# Playwright
+test-results/
+playwright-report/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Cloudflare / wrangler
+.wrangler/
+.dev.vars

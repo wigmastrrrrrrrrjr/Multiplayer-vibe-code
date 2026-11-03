@@ -1,0 +1,31 @@
+{
+  "name": "@mvc/agent",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Electron tray app + headless sync engine (create/join/push a lobby folder).",
+  "main": "src/main.js",
+  "exports": {
+    ".": "./src/sync/engine.js"
+  },
+  "bin": {
+    "mvc-agent": "src/cli.js"
+  },
+  "scripts": {
+    "start": "electron .",
+    "cli": "node src/cli.js",
+    "test": "node --test src/sync/*.test.js src/update/*.test.js src/mcp/*.test.js",
+    "typecheck": "node --check src/main.js && node --check src/cli.js && node --check src/sync/engine.js && node --check src/update/updater.js && node --check src/mcp/install.js"
+  },
+  "dependencies": {
+    "@mvc/shared": "*",
+    "chokidar": "^4.0.1",
+    "yjs": "^13.6.18"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0"
+  },
+  "optionalDependencies": {
+    "electron": "^33.2.0"
+  }
+}
